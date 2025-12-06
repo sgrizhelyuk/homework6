@@ -1,16 +1,16 @@
-# This is a sample Python script.
+def process_parsing_visit_log():
+    visit_file = open('csvs/visit_log.csv', 'r')
+    next(visit_file)
+    with open('csvs/funnel.csv', 'w') as funnel_file:
+        funnel_file.write('user_id,source,category\n')
+        for line in visit_file:
+            parts = line.split(',')
+            user_id = parts[0]
+            source = parts[1]
+            if source.strip() != 'None' and source.strip() != 'other' and source.strip() != 'context':
+                category = source
+                category = category.strip()
+                funnel_file.write(f'{user_id},{source.strip()},{category}\n')
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    process_parsing_visit_log()
